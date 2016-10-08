@@ -127,4 +127,15 @@ public class ResourcesPanel extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.Resources");
     }        
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

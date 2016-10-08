@@ -77,4 +77,15 @@ public class AttributeSetsPanel extends JPanelTable2 {
     public String getTitle() {
         return AppLocal.getIntString("Menu.AttributeSets");
     }
+
+     /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

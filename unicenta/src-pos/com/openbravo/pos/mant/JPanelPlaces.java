@@ -129,4 +129,15 @@ public class JPanelPlaces extends JPanelTable {
         jeditor.activate(); // primero activo el editor 
         super.activate();   // segundo activo el padre        
     }     
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

@@ -84,4 +84,15 @@ public class JPanelPayments extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.Payments");
     }    
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

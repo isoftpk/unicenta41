@@ -118,4 +118,14 @@ public class RolesPanel extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.Roles");
     }        
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

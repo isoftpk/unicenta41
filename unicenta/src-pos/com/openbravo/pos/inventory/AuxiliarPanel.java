@@ -121,7 +121,18 @@ public class AuxiliarPanel extends JPanelTable2 {
         bd.setEditable(prod != null);
         bd.actionLoad();
     }
-            
+
+        /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
+    
     private class ReloadActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

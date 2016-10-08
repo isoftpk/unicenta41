@@ -91,7 +91,7 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
         if (bd == null) {
             
             // init browsable editable data
-            bd = new BrowsableEditableData(getListProvider(), getSaveProvider(), getEditor(), dirty);
+            bd = new BrowsableEditableData(getListProvider(), getSaveProvider(), getEditor(), getJBarcodePrint(), dirty);
 
             // Add the filter panel
             Component c = getFilter();
@@ -137,7 +137,17 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
             toolbar.add(c);
             c = new JSaver(bd);
             c.applyComponentOrientation(getComponentOrientation());
-            toolbar.add(c);
+            toolbar.add(c, java.awt.BorderLayout.SOUTH);
+            
+            ///Barcode Print Panel - PK 14-04-16
+            if (getJBarcodePrint() != null)	{
+            c = getJBarcodePrint().getComponent();
+            if (c != null) {
+	            c.applyComponentOrientation(getComponentOrientation());
+	            container.add(c, java.awt.BorderLayout.SOUTH);
+            }
+            }
+            
         }
     }
     
@@ -167,6 +177,12 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
      * @return
      */
     public abstract EditorRecord getEditor();
+
+    /**
+     *
+     * @return
+     */
+    public abstract EditorRecord getJBarcodePrint();
     
     /**
      *

@@ -143,6 +143,7 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
         jcboMachinePrinter.addItem("surepos");
         jcboMachinePrinter.addItem("plain");
         jcboMachinePrinter.addItem("javapos");
+        jcboMachinePrinter.addItem("argox");
 
         jcboConnPrinter.addItem("file");
         jcboConnPrinter.addItem("serial");
@@ -162,7 +163,11 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
         jcboSerialPrinter.addItem("/dev/ttyS3");
         jcboSerialPrinter.addItem("/dev/ttyS4");
         jcboSerialPrinter.addItem("/dev/ttyS5");
-
+        jcboSerialPrinter.addItem("/dev/ttyUSB0");
+        jcboSerialPrinter.addItem("/dev/ttyUSB1");
+        jcboSerialPrinter.addItem("/dev/ttyUSB2");
+        jcboSerialPrinter.addItem("/dev/ttyUSB3");
+        
         jcboMachinePrinter2.addItem("Not defined");
         jcboMachinePrinter2.addItem("screen");
         jcboMachinePrinter2.addItem("printer");
@@ -174,6 +179,7 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
         jcboMachinePrinter2.addItem("surepos");
         jcboMachinePrinter2.addItem("plain");
         jcboMachinePrinter2.addItem("javapos");
+        jcboMachinePrinter2.addItem("argox");
 
         jcboConnPrinter2.addItem("file");
         jcboConnPrinter2.addItem("serial");
@@ -193,6 +199,10 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
         jcboSerialPrinter2.addItem("/dev/ttyS3");
         jcboSerialPrinter2.addItem("/dev/ttyS4");
         jcboSerialPrinter2.addItem("/dev/ttyS5");
+        jcboSerialPrinter2.addItem("/dev/ttyUSB0");
+        jcboSerialPrinter2.addItem("/dev/ttyUSB1");
+        jcboSerialPrinter2.addItem("/dev/ttyUSB2");
+        jcboSerialPrinter2.addItem("/dev/ttyUSB3");
 
         jcboMachinePrinter3.addItem("Not defined");
         jcboMachinePrinter3.addItem("screen");
@@ -205,7 +215,7 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
         jcboMachinePrinter3.addItem("surepos");
         jcboMachinePrinter3.addItem("plain");
         jcboMachinePrinter3.addItem("javapos");
-
+        
         jcboConnPrinter3.addItem("file");
         jcboConnPrinter3.addItem("serial");
 
@@ -346,7 +356,10 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
         jcboSerialDisplay.addItem("/dev/ttyS3");
         jcboSerialDisplay.addItem("/dev/ttyS4");
         jcboSerialDisplay.addItem("/dev/ttyS5");
-
+        jcboSerialDisplay.addItem("/dev/ttyUSB0");
+        jcboSerialDisplay.addItem("/dev/ttyUSB1");
+        jcboSerialDisplay.addItem("/dev/ttyUSB2");
+        jcboSerialDisplay.addItem("/dev/ttyUSB3");
         
         // Scale
         jcboMachineScale.addItem("Not defined");
@@ -371,6 +384,10 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
         jcboSerialScale.addItem("/dev/ttyS3");
         jcboSerialScale.addItem("/dev/ttyS4");
         jcboSerialScale.addItem("/dev/ttyS5");
+        jcboSerialScale.addItem("/dev/ttyUSB0");
+        jcboSerialScale.addItem("/dev/ttyUSB1");
+        jcboSerialScale.addItem("/dev/ttyUSB2");
+        jcboSerialScale.addItem("/dev/ttyUSB3");
 
         // Scanner
         jcboMachineScanner.addItem("Not defined");
@@ -672,6 +689,7 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
             case "ODP1000":
             case "ithaca":
             case "surepos":
+            case "argox":
                 config.setProperty("machine.printer.2", sMachinePrinter2 + ":" + 
                         comboValue(jcboConnPrinter2.getSelectedItem()) + "," + 
                         comboValue(jcboSerialPrinter2.getSelectedItem()));
@@ -875,6 +893,11 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
         comboBox.addItem("/dev/ttyS3");
         comboBox.addItem("/dev/ttyS4");
         comboBox.addItem("/dev/ttyS5");
+        comboBox.addItem("/dev/ttyUSB0");
+        comboBox.addItem("/dev/ttyUSB1");
+        comboBox.addItem("/dev/ttyUSB2");
+        comboBox.addItem("/dev/ttyUSB3");
+        
     }
 
     private void addRegisteredPrinters(javax.swing.JComboBox comboBox) {
@@ -2189,7 +2212,8 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
                 "tmu220".equals(jcboMachinePrinter2.getSelectedItem()) || 
                 "star".equals(jcboMachinePrinter2.getSelectedItem()) || 
                 "ithaca".equals(jcboMachinePrinter2.getSelectedItem()) || 
-                "surepos".equals(jcboMachinePrinter2.getSelectedItem())) {
+                "surepos".equals(jcboMachinePrinter2.getSelectedItem()) || 
+                "argox".equals(jcboMachinePrinter2.getSelectedItem())) {
             cl.show(m_jPrinterParams2, "comm");
         } else if ("javapos".equals(jcboMachinePrinter2.getSelectedItem())) {
             cl.show(m_jPrinterParams2, "javapos");
@@ -2208,7 +2232,8 @@ public class JPanelConfigPeripheral extends javax.swing.JPanel implements PanelC
                 "tmu220".equals(jcboMachinePrinter.getSelectedItem()) || 
                 "star".equals(jcboMachinePrinter.getSelectedItem()) || 
                 "ithaca".equals(jcboMachinePrinter.getSelectedItem()) || 
-                "surepos".equals(jcboMachinePrinter.getSelectedItem())) {
+                "surepos".equals(jcboMachinePrinter.getSelectedItem()) || 
+                "argox".equals(jcboMachinePrinter.getSelectedItem())) {
             cl.show(m_jPrinterParams1, "comm");
         } else if ("javapos".equals(jcboMachinePrinter.getSelectedItem())) {
             cl.show(m_jPrinterParams1, "javapos");

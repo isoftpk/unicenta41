@@ -131,23 +131,17 @@
                           <Component id="m_jtxtDescription" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="2" attributes="0">
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="jbtnShowCalendar" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="2" attributes="0">
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="m_jPanelTime" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="m_jPanelTime" alignment="2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="m_jPanelList" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="m_jPanelList" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

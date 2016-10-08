@@ -113,7 +113,8 @@ public class JTicketsBagRestaurantRes extends javax.swing.JPanel implements Edit
         SaveProvider spr = new SaveProvider(dlCustomers.getReservationsUpdate(), 
             dlCustomers.getReservationsInsert(), dlCustomers.getReservationsDelete());        
         
-        m_bd = new BrowsableEditableData(lpr, spr, new CompareReservations(), this, m_Dirty);           
+        ///added second 'this' for Barcode Print Panel - PK 14-04-16
+        m_bd = new BrowsableEditableData(lpr, spr, new CompareReservations(), this, this, m_Dirty);           
         
         JListNavigator nl = new JListNavigator(m_bd, true);
         nl.setCellRenderer(new JCalendarItemRenderer());  

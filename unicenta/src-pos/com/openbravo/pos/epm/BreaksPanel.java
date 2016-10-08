@@ -130,4 +130,15 @@ public class BreaksPanel extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.Breaks");
     }
+
+     /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

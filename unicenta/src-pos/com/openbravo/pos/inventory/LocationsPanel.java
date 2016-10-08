@@ -117,4 +117,15 @@ public class LocationsPanel extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.Locations");
     }      
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

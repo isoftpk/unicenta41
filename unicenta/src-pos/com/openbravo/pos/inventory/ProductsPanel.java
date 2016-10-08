@@ -20,6 +20,8 @@
 package com.openbravo.pos.inventory;
 
 import com.openbravo.basic.BasicException;
+//Added Barcode class PK 16-10-01
+import com.openbravo.data.gui.JBarcodePrint;
 import com.openbravo.data.user.EditorListener;
 import com.openbravo.data.user.EditorRecord;
 import com.openbravo.data.user.ListProviderCreator;
@@ -27,6 +29,8 @@ import com.openbravo.data.user.SaveProvider;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.panels.JPanelTable2;
+//Added exception PK 16-10-01
+import com.openbravo.pos.printer.TicketPrinterException;
 import com.openbravo.pos.ticket.ProductFilter;
 
 import java.awt.Component;
@@ -40,7 +44,8 @@ import javax.swing.JButton;
 public class ProductsPanel extends JPanelTable2 implements EditorListener {
 
     private ProductsEditor jeditor;
-    private ProductFilter jproductfilter;         
+    private ProductFilter jproductfilter;
+    private JBarcodePrint jbarcodeprint;
     
     private DataLogicSales m_dlSales = null;
     
@@ -56,6 +61,16 @@ public class ProductsPanel extends JPanelTable2 implements EditorListener {
         
         jproductfilter = new ProductFilter();     
         jproductfilter.init(app);
+        
+         ///Barcode Print Panel - PK 14-04-16
+         try {
+                jbarcodeprint = new JBarcodePrint(dirty);
+	} 
+         catch (TicketPrinterException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+                }
+
 
         row = m_dlSales.getProductsRow();
 
@@ -87,6 +102,13 @@ public class ProductsPanel extends JPanelTable2 implements EditorListener {
         return jproductfilter.getComponent();
     }
 
+     /**
+     *
+     * @return jbarcodeprint
+     */
+    public EditorRecord getJBarcodePrint() {
+	return jbarcodeprint;
+}    
     /**
      *
      * @return btnScanPal

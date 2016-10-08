@@ -40,6 +40,9 @@ public abstract class JPanelTable2 extends JPanelTable {
     /**
      *
      */
+
+
+
     protected ListProvider lpr;
 
     /**

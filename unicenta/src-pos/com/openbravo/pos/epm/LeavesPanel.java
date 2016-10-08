@@ -127,4 +127,15 @@ public class LeavesPanel extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.Leaves");
     }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

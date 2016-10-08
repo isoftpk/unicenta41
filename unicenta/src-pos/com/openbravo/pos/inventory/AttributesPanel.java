@@ -69,6 +69,17 @@ public class AttributesPanel extends JPanelTable2 {
         return editor;
     }
 
+     /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+   
+    
     /**
      *
      * @return

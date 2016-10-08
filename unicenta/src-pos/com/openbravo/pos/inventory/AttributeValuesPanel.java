@@ -116,6 +116,7 @@ public class AttributeValuesPanel extends JPanelTable2 {
         return AppLocal.getIntString("Menu.AttributeValues");
     }
 
+  
     private class ReloadActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -125,4 +126,10 @@ public class AttributeValuesPanel extends JPanelTable2 {
             }
         }
     }
+
+	@Override
+	public EditorRecord getJBarcodePrint() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

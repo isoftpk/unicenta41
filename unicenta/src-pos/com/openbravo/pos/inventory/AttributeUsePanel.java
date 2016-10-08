@@ -121,6 +121,17 @@ public class AttributeUsePanel extends JPanelTable2 {
     public String getTitle() {
         return AppLocal.getIntString("Menu.AttributeUse");
     }
+    
+        /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 
     private class ReloadActionListener implements ActionListener {
         @Override

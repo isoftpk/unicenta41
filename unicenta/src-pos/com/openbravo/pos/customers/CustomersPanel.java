@@ -131,4 +131,15 @@ public class CustomersPanel extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.CustomersManagement");
     }    
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

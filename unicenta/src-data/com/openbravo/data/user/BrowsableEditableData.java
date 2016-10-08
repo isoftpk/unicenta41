@@ -59,6 +59,8 @@ public class BrowsableEditableData {
     protected EventListenerList listeners = new EventListenerList();
 
     private EditorRecord m_editorrecord;
+    private EditorRecord m_editorrecordbp;
+
     private DirtyManager m_Dirty;
     private int m_iState; // vinculado siempre al m_editorrecord
 //    private DocumentLoader m_keyvalue;
@@ -73,10 +75,11 @@ public class BrowsableEditableData {
      * @param ed
      * @param dirty
      */
-    public BrowsableEditableData(BrowsableData bd, EditorRecord ed, DirtyManager dirty) {
+    public BrowsableEditableData(BrowsableData bd, EditorRecord ed, EditorRecord bp, DirtyManager dirty) {
         m_bd = bd;
 
         m_editorrecord = ed;
+        m_editorrecordbp = bp;        
         m_Dirty = dirty;
         m_iState = ST_NORECORD;
         m_iIndex = INX_EOF; // En EOF
@@ -85,6 +88,10 @@ public class BrowsableEditableData {
         
         // Inicializo ?
         m_editorrecord.writeValueEOF();
+        if (bp != null)	{
+        	m_editorrecordbp.writeValueEOF();
+        }
+        
         m_Dirty.setDirty(false);
     }
     
@@ -96,8 +103,8 @@ public class BrowsableEditableData {
      * @param ed
      * @param dirty
      */
-    public BrowsableEditableData(ListProvider dataprov, SaveProvider saveprov, Comparator c, EditorRecord ed, DirtyManager dirty) {
-        this(new BrowsableData(dataprov, saveprov, c), ed, dirty);
+    public BrowsableEditableData(ListProvider dataprov, SaveProvider saveprov, Comparator c, EditorRecord ed, EditorRecord bp, DirtyManager dirty) {
+        this(new BrowsableData(dataprov, saveprov, c), ed, bp, dirty);
     }
 
     /**
@@ -107,8 +114,8 @@ public class BrowsableEditableData {
      * @param ed
      * @param dirty
      */
-    public BrowsableEditableData(ListProvider dataprov, SaveProvider saveprov, EditorRecord ed, DirtyManager dirty) {
-        this(new BrowsableData(dataprov, saveprov, null), ed, dirty);
+    public BrowsableEditableData(ListProvider dataprov, SaveProvider saveprov, EditorRecord ed, EditorRecord bp, DirtyManager dirty) {
+        this(new BrowsableData(dataprov, saveprov, null), ed, bp, dirty);
     }
 
     /**
@@ -218,9 +225,16 @@ public class BrowsableEditableData {
         if (obj == null) {
             m_iState = ST_NORECORD;
             m_editorrecord.writeValueEOF();
+            if (m_editorrecordbp != null)	{
+            	m_editorrecordbp.writeValueEOF();
+            }
         } else {
             m_iState = ST_UPDATE;
             m_editorrecord.writeValueEdit(obj);
+            if (m_editorrecordbp != null)	{
+            	m_editorrecordbp.writeValueEdit(obj);
+            }
+
         }
         m_Dirty.setDirty(false);
         fireStateUpdate();   

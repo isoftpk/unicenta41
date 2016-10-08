@@ -55,5 +55,16 @@ public class UomPanel extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.Uom");
     }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
     
 }

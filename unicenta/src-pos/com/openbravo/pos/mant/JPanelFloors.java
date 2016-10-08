@@ -114,4 +114,15 @@ public class JPanelFloors extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.Floors");
     }     
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

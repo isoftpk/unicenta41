@@ -92,6 +92,17 @@ public class StockDiaryPanel extends JPanelTable {
         return AppLocal.getIntString("Menu.StockDiary");
     }
 
+        /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
+    
     /**
      *
      * @throws BasicException

@@ -117,4 +117,15 @@ public class TaxCustCategoriesPanel extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.TaxCustCategories");
     }     
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

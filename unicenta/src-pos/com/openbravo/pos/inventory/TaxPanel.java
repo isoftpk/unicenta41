@@ -129,4 +129,15 @@ public class TaxPanel extends JPanelTable {
     public String getTitle() {
         return AppLocal.getIntString("Menu.Taxes");
     }     
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }

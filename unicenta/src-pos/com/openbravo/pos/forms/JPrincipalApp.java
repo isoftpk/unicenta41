@@ -29,6 +29,7 @@ import com.openbravo.pos.scripting.ScriptFactory;
 import com.openbravo.pos.util.Hashcypher;
 import com.openbravo.pos.util.StringUtils;
 import java.awt.CardLayout;
+import java.awt.Color;
 // import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -93,7 +94,7 @@ public class JPrincipalApp extends javax.swing.JPanel implements AppUserView {
         jPanel2.add(Box.createVerticalStrut(50), 0);
         m_jPanelLeft.getVerticalScrollBar().setPreferredSize(new Dimension(35, 35));
         
- //       m_jPanelLeft.setBackground(Color.black);
+//        m_jPanelLeft.setBackground(Color.BLACK);
         
         applyComponentOrientation(appview.getComponentOrientation());
        
@@ -507,7 +508,8 @@ public class JPrincipalApp extends javax.swing.JPanel implements AppUserView {
                 m_jLastView = m_jMyView;
 
                 setMenuVisible(getBounds().width > 800);
-                setMenuVisible(false);
+                /// Stop the Menu from going Invisible after each action PK - 16-10-01
+//                setMenuVisible(false);
 
                 showView(sTaskClass);   
                 String sTitle = m_jMyView.getTitle();

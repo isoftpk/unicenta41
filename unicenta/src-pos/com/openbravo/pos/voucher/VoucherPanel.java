@@ -46,5 +46,14 @@ public class VoucherPanel extends JPanelTable2 {
         return AppLocal.getIntString("Menu.Vouchers");
     } 
     
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
     
 }

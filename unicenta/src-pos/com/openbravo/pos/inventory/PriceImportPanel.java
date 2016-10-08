@@ -145,4 +145,15 @@ public class PriceImportPanel extends JPanelTable2 implements EditorListener {
     @Override
     public void updateValue(Object value) {
     }    
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public EditorRecord getJBarcodePrint() {
+            // TODO Auto-generated method stub
+            return null;
+    }     
+
 }
