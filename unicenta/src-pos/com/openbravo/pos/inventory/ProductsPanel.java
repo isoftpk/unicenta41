@@ -64,12 +64,12 @@ public class ProductsPanel extends JPanelTable2 implements EditorListener {
         
          ///Barcode Print Panel - PK 14-04-16
          try {
-                jbarcodeprint = new JBarcodePrint(dirty);
+            jbarcodeprint = new JBarcodePrint(dirty);
 	} 
          catch (TicketPrinterException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
-                }
+        }
 
 
         row = m_dlSales.getProductsRow();
