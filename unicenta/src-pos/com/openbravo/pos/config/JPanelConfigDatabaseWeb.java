@@ -241,7 +241,7 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
         jLabel6.setText(bundle.getString("label.DatabaseWeb")); // NOI18N
         jLabel6.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 196, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         jcboDBDriver.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcboDBDriver.setPreferredSize(new java.awt.Dimension(150, 30));
@@ -250,16 +250,16 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
                 jcboDBDriverActionPerformed(evt);
             }
         });
-        add(jcboDBDriver, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 196, -1, -1));
+        add(jcboDBDriver, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel18.setText(AppLocal.getIntString("label.dbwebdriverlib")); // NOI18N
         jLabel18.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 154, -1, 25));
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, 25));
 
         jtxtDbDriverLib.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtxtDbDriverLib.setPreferredSize(new java.awt.Dimension(500, 30));
-        add(jtxtDbDriverLib, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 152, -1, -1));
+        add(jtxtDbDriverLib, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
 
         jbtnDbDriverLib.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/fileopen.png"))); // NOI18N
         jbtnDbDriverLib.setText("  ");
@@ -267,12 +267,12 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
         jbtnDbDriverLib.setMaximumSize(new java.awt.Dimension(64, 32));
         jbtnDbDriverLib.setMinimumSize(new java.awt.Dimension(64, 32));
         jbtnDbDriverLib.setPreferredSize(new java.awt.Dimension(80, 45));
-        add(jbtnDbDriverLib, new org.netbeans.lib.awtextra.AbsoluteConstraints(649, 145, -1, -1));
+        add(jbtnDbDriverLib, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText(AppLocal.getIntString("label.DbWebDriver")); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 196, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, -1, -1));
 
         jtxtDbDriver.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtxtDbDriver.setPreferredSize(new java.awt.Dimension(150, 30));
@@ -281,7 +281,7 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
                 jtxtDbDriverActionPerformed(evt);
             }
         });
-        add(jtxtDbDriver, new org.netbeans.lib.awtextra.AbsoluteConstraints(459, 197, -1, -1));
+        add(jtxtDbDriver, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText(AppLocal.getIntString("label.DbWebURL")); // NOI18N
@@ -331,7 +331,7 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
         jLabel5.setToolTipText("");
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel5.setPreferredSize(new java.awt.Dimension(889, 120));
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 880, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 880, -1));
 
         jButtonTest1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButtonTest1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/database.png"))); // NOI18N
@@ -402,7 +402,7 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
         LblMultiDB.setText(AppLocal.getIntString("label.dbweb")); // NOI18N
         LblMultiDB.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         LblMultiDB.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(LblMultiDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 233, -1, -1));
+        add(LblMultiDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
         multiDB.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         multiDB.setPreferredSize(new java.awt.Dimension(80, 30));
@@ -411,7 +411,7 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
                 multiDBActionPerformed(evt);
             }
         });
-        add(multiDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 233, -1, -1));
+        add(multiDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
 
         jLblDBIP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLblDBIP.setText(AppLocal.getIntString("label.DbWebIP")); // NOI18N
