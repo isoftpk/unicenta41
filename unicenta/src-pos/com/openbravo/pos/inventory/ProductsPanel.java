@@ -71,7 +71,6 @@ public class ProductsPanel extends JPanelTable2 implements EditorListener {
 	e.printStackTrace();
         }
 
-
         row = m_dlSales.getProductsRow();
 
         lpr =  new ListProviderCreator(m_dlSales.getProductCatQBF(), jproductfilter);

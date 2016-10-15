@@ -66,6 +66,10 @@ public class JPanelConfiguration extends JPanel implements JPanelView {
         panel = new JPanelConfigDatabase();
         m_panelconfig.add(panel);
         jPanelDatabase.add(panel.getConfigComponent());
+
+        panel = new JPanelConfigDatabaseWeb();
+        m_panelconfig.add(panel);
+        jPanelDatabaseWeb.add(panel.getConfigComponent());
         
         panel = new JPanelConfigGeneral();
         m_panelconfig.add(panel);
@@ -216,6 +220,7 @@ public class JPanelConfiguration extends JPanel implements JPanelView {
         jPanelTicketSetup = new javax.swing.JPanel();
         jPanelCompany = new javax.swing.JPanel();
         jPanelDatabase = new javax.swing.JPanel();
+        jPanelDatabaseWeb = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jbtnRestore = new javax.swing.JButton();
         jbtnExit = new javax.swing.JButton();
@@ -276,6 +281,12 @@ public class JPanelConfiguration extends JPanel implements JPanelView {
         jPanelDatabase.setPreferredSize(new java.awt.Dimension(0, 400));
         jPanelDatabase.setLayout(new javax.swing.BoxLayout(jPanelDatabase, javax.swing.BoxLayout.LINE_AXIS));
         jTabbedPane1.addTab("Database Setup", jPanelDatabase);
+
+        jPanelDatabaseWeb.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelDatabaseWeb.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPanelDatabaseWeb.setPreferredSize(new java.awt.Dimension(0, 400));
+        jPanelDatabaseWeb.setLayout(new javax.swing.BoxLayout(jPanelDatabaseWeb, javax.swing.BoxLayout.LINE_AXIS));
+        jTabbedPane1.addTab("Web", jPanelDatabaseWeb);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -352,6 +363,8 @@ public class JPanelConfiguration extends JPanel implements JPanelView {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        jTabbedPane1.getAccessibleContext().setAccessibleParent(jTabbedPane1);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRestoreActionPerformed
@@ -382,6 +395,7 @@ public class JPanelConfiguration extends JPanel implements JPanelView {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCompany;
     private javax.swing.JPanel jPanelDatabase;
+    private javax.swing.JPanel jPanelDatabaseWeb;
     private javax.swing.JPanel jPanelGeneral;
     private javax.swing.JPanel jPanelLocale;
     private javax.swing.JPanel jPanelPayment;

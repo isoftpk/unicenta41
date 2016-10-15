@@ -306,6 +306,12 @@ public class BrowsableData implements ListModel {
                 
         if (canUpdateData() && index >= 0 && index < m_aData.size()) {
             if (m_saveprov.updateData(value) > 0) { 
+                
+            /// PK
+            /// update product on website catalog
+            
+            
+                
                 // Modificamos el elemento indicado
                 int newindex;
                 if (m_comparer == null) {

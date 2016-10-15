@@ -910,7 +910,7 @@ public class JRootApp extends JPanel implements AppView, DeviceMonitorEventListe
         jPanel3 = new javax.swing.JPanel();
 
         setEnabled(false);
-        setPreferredSize(new java.awt.Dimension(1024, 768));
+        setPreferredSize(new java.awt.Dimension(1440, 900));
         setLayout(new java.awt.BorderLayout());
 
         m_jPanelTitle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, javax.swing.UIManager.getDefaults().getColor("Button.darkShadow")));
