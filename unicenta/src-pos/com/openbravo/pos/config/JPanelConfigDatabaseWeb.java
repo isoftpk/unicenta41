@@ -52,33 +52,26 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
         
         initComponents();
         
-        
-        jtxtDbDriverLib.getDocument().addDocumentListener(dirty);
-        jtxtDbDriver.getDocument().addDocumentListener(dirty);
-        jbtnDbDriverLib.addActionListener(new DirectoryEvent(jtxtDbDriverLib));
+        jtxtDbWebDriverLib.getDocument().addDocumentListener(dirty);
+        jtxtDbWebDriver.getDocument().addDocumentListener(dirty);
+        jbtnDbWebDriverLib.addActionListener(new DirectoryEvent(jtxtDbWebDriverLib));
         jcboDBDriver.addActionListener(dirty);
         jcboDBDriver.addItem("MySQL");
 //        jcboDBDriver.addItem("PostgreSQL");
         
         jcboDBDriver.setSelectedIndex(0);
         
-        multiDB.addActionListener(dirty);        
+        webEnable.addActionListener(dirty);        
         
 // primary DB        
-        jtxtDbName.getDocument().addDocumentListener(dirty);
-        jtxtDbURL.getDocument().addDocumentListener(dirty);
-        jtxtDbIP.getDocument().addDocumentListener(dirty);
-        jtxtDbPort.getDocument().addDocumentListener(dirty);        
-        jtxtDbPassword.getDocument().addDocumentListener(dirty);
-        jtxtDbUser.getDocument().addDocumentListener(dirty);        
+        jtxtDbWebName.getDocument().addDocumentListener(dirty);
+        jtxtDbWebURL.getDocument().addDocumentListener(dirty);
+        jtxtDbWebIP.getDocument().addDocumentListener(dirty);
+        jtxtDbWebPort.getDocument().addDocumentListener(dirty);        
+        jtxtDbWebPassword.getDocument().addDocumentListener(dirty);
+        jtxtDbWebUser.getDocument().addDocumentListener(dirty);        
 
-// secondary DB        
-        jtxtDbName1.getDocument().addDocumentListener(dirty);        
-        jtxtDbURL1.getDocument().addDocumentListener(dirty);
-        jtxtDbIP1.getDocument().addDocumentListener(dirty);
-        jtxtDbPort1.getDocument().addDocumentListener(dirty);        
-        jtxtDbPassword1.getDocument().addDocumentListener(dirty);
-        jtxtDbUser1.getDocument().addDocumentListener(dirty);        
+// secondary DB - NONE
 
     }
 
@@ -107,40 +100,28 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
     @Override
     public void loadProperties(AppConfig config) {
         
-        multiDB.setSelected(Boolean.parseBoolean(config.getProperty("db.multi")));                
+        webEnable.setSelected(Boolean.parseBoolean(config.getProperty("dbweb.enable")));                
 
-        jcboDBDriver.setSelectedItem(config.getProperty("db.engine"));
-        jtxtDbDriverLib.setText(config.getProperty("db.driverlib"));
-        jtxtDbDriver.setText(config.getProperty("db.driver"));
+        jcboDBDriver.setSelectedItem(config.getProperty("dbweb.engine"));
+        jtxtDbWebDriverLib.setText(config.getProperty("dbweb.driverlib"));
+        jtxtDbWebDriver.setText(config.getProperty("dbweb.driver"));
 
 // primary DB              
-        jtxtDbName.setText(config.getProperty("db.name"));
-        jtxtDbIP.setText(config.getProperty("db.ip"));
-        jtxtDbPort.setText(config.getProperty("db.port"));        
-        jtxtDbURL.setText(config.getProperty("db.URL"));
-        String sDBUser = config.getProperty("db.user");
-        String sDBPassword = config.getProperty("db.password");        
+        jtxtDbWebName.setText(config.getProperty("dbweb.name"));
+        jtxtDbWebIP.setText(config.getProperty("dbweb.ip"));
+        jtxtDbWebPort.setText(config.getProperty("dbweb.port"));        
+        jtxtDbWebURL.setText(config.getProperty("dbweb.URL"));
+        String sDBUser = config.getProperty("dbweb.user");
+        String sDBPassword = config.getProperty("dbweb.password");        
         if (sDBUser != null && sDBPassword != null && sDBPassword.startsWith("crypt:")) {
             AltEncrypter cypher = new AltEncrypter("cypherkey" + sDBUser);
             sDBPassword = cypher.decrypt(sDBPassword.substring(6));
         }        
-        jtxtDbUser.setText(sDBUser);
-        jtxtDbPassword.setText(sDBPassword);   
+        jtxtDbWebUser.setText(sDBUser);
+        jtxtDbWebPassword.setText(sDBPassword);   
 
-// secondary DB        
-        jtxtDbName1.setText(config.getProperty("db1.name"));
-        jtxtDbIP1.setText(config.getProperty("db1.ip"));
-        jtxtDbPort1.setText(config.getProperty("db1.port"));        
-        jtxtDbURL1.setText(config.getProperty("db1.URL"));
-        String sDBUser1 = config.getProperty("db1.user");
-        String sDBPassword1 = config.getProperty("db1.password");        
-        if (sDBUser1 != null && sDBPassword1 != null && sDBPassword1.startsWith("crypt:")) {
-            AltEncrypter cypher = new AltEncrypter("cypherkey" + sDBUser1);
-            sDBPassword1 = cypher.decrypt(sDBPassword1.substring(6));
-        }        
-        jtxtDbUser1.setText(sDBUser1);
-        jtxtDbPassword1.setText(sDBPassword1);          
-        
+// secondary DB - NONE
+
         dirty.setDirty(false);
     }
    
@@ -152,31 +133,23 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
     public void saveProperties(AppConfig config) {
 
 // multi-db        
-        config.setProperty("db.multi",Boolean.toString(multiDB.isSelected()));
+        config.setProperty("dbweb.enable",Boolean.toString(webEnable.isSelected()));
         
-        config.setProperty("db.engine", comboValue(jcboDBDriver.getSelectedItem()));
-        config.setProperty("db.driverlib", jtxtDbDriverLib.getText());
-        config.setProperty("db.driver", jtxtDbDriver.getText());
+        config.setProperty("dbweb.engine", comboValue(jcboDBDriver.getSelectedItem()));
+        config.setProperty("dbweb.driverlib", jtxtDbWebDriverLib.getText());
+        config.setProperty("dbweb.driver", jtxtDbWebDriver.getText());
 
 // primary DB
-        config.setProperty("db.name", jtxtDbName.getText());
-        config.setProperty("db.ip", jtxtDbIP.getText());
-        config.setProperty("db.port", jtxtDbPort.getText());        
-        config.setProperty("db.URL", jtxtDbURL.getText());
-        config.setProperty("db.user", jtxtDbUser.getText());
-        AltEncrypter cypher = new AltEncrypter("cypherkey" + jtxtDbUser.getText());       
-        config.setProperty("db.password", "crypt:" + 
-                cypher.encrypt(new String(jtxtDbPassword.getPassword())));
+        config.setProperty("dbweb.name", jtxtDbWebName.getText());
+        config.setProperty("dbweb.ip", jtxtDbWebIP.getText());
+        config.setProperty("dbweb.port", jtxtDbWebPort.getText());        
+        config.setProperty("dbweb.URL", jtxtDbWebURL.getText());
+        config.setProperty("dbweb.user", jtxtDbWebUser.getText());
+        AltEncrypter cypher = new AltEncrypter("cypherkey" + jtxtDbWebUser.getText());       
+        config.setProperty("dbweb.password", "crypt:" + 
+                cypher.encrypt(new String(jtxtDbWebPassword.getPassword())));
 
-// secondary DB        
-        config.setProperty("db1.name", jtxtDbName1.getText());        
-        config.setProperty("db1.ip", jtxtDbIP1.getText());
-        config.setProperty("db1.port", jtxtDbPort1.getText());        
-        config.setProperty("db1.URL", jtxtDbURL1.getText());        
-        config.setProperty("db1.user", jtxtDbUser1.getText());
-        cypher = new AltEncrypter("cypherkey" + jtxtDbUser1.getText());       
-        config.setProperty("db1.password", "crypt:" + 
-                cypher.encrypt(new String(jtxtDbPassword1.getPassword())));        
+// secondary DB - NONE
 
         dirty.setDirty(false);
     }
@@ -195,54 +168,41 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
     private void initComponents() {
 
         webPopOver1 = new com.alee.extended.window.WebPopOver();
-        jLabel6 = new javax.swing.JLabel();
+        jLblDbWeb = new javax.swing.JLabel();
         jcboDBDriver = new javax.swing.JComboBox();
-        jLabel18 = new javax.swing.JLabel();
-        jtxtDbDriverLib = new javax.swing.JTextField();
-        jbtnDbDriverLib = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jtxtDbDriver = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jtxtDbURL = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jtxtDbUser = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jtxtDbPassword = new javax.swing.JPasswordField();
-        jButtonTest = new javax.swing.JButton();
+        jLblDbWebDriverLib = new javax.swing.JLabel();
+        jtxtDbWebDriverLib = new javax.swing.JTextField();
+        jbtnDbWebDriverLib = new javax.swing.JButton();
+        jLblDbWebDriver = new javax.swing.JLabel();
+        jtxtDbWebDriver = new javax.swing.JTextField();
+        jLblDbWebURL = new javax.swing.JLabel();
+        jtxtDbWebURL = new javax.swing.JTextField();
+        jLblDbWebUser = new javax.swing.JLabel();
+        jtxtDbWebUser = new javax.swing.JTextField();
+        jLblDbWebPass = new javax.swing.JLabel();
+        jtxtDbWebPassword = new javax.swing.JPasswordField();
+        jBtnWebTest = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        jButtonTest1 = new javax.swing.JButton();
-        jtxtDbPassword1 = new javax.swing.JPasswordField();
-        jtxtDbUser1 = new javax.swing.JTextField();
-        jtxtDbURL1 = new javax.swing.JTextField();
-        jLblDbURL1 = new javax.swing.JLabel();
-        jLblDbUser1 = new javax.swing.JLabel();
-        jLblDbPassword1 = new javax.swing.JLabel();
-        jLblDBName = new javax.swing.JLabel();
-        jtxtDbName = new javax.swing.JTextField();
-        jLblDbName1 = new javax.swing.JLabel();
-        jtxtDbName1 = new javax.swing.JTextField();
-        LblMultiDB = new com.alee.laf.label.WebLabel();
-        multiDB = new com.alee.extended.button.WebSwitch();
-        jLblDBIP = new javax.swing.JLabel();
-        jtxtDbIP = new javax.swing.JTextField();
-        jLblDbIP1 = new javax.swing.JLabel();
-        jtxtDbIP1 = new javax.swing.JTextField();
-        jLblDBPort = new javax.swing.JLabel();
-        jtxtDbPort = new javax.swing.JTextField();
-        jLblDBPort1 = new javax.swing.JLabel();
-        jtxtDbPort1 = new javax.swing.JTextField();
+        jLblDbWebName = new javax.swing.JLabel();
+        jtxtDbWebName = new javax.swing.JTextField();
+        LblMultiDbWeb = new com.alee.laf.label.WebLabel();
+        webEnable = new com.alee.extended.button.WebSwitch();
+        jLblDbWebIP = new javax.swing.JLabel();
+        jtxtDbWebIP = new javax.swing.JTextField();
+        jLblDbWebPort = new javax.swing.JLabel();
+        jtxtDbWebPort = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         setPreferredSize(new java.awt.Dimension(900, 500));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLblDbWeb.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
-        jLabel6.setText(bundle.getString("label.DatabaseWeb")); // NOI18N
-        jLabel6.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+        jLblDbWeb.setText(bundle.getString("label.DatabaseWeb")); // NOI18N
+        jLblDbWeb.setPreferredSize(new java.awt.Dimension(125, 30));
+        add(jLblDbWeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         jcboDBDriver.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcboDBDriver.setPreferredSize(new java.awt.Dimension(150, 30));
@@ -253,75 +213,75 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
         });
         add(jcboDBDriver, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
 
-        jLabel18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel18.setText(AppLocal.getIntString("label.dbwebdriverlib")); // NOI18N
-        jLabel18.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, 25));
+        jLblDbWebDriverLib.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLblDbWebDriverLib.setText(AppLocal.getIntString("label.dbwebdriverlib")); // NOI18N
+        jLblDbWebDriverLib.setPreferredSize(new java.awt.Dimension(125, 30));
+        add(jLblDbWebDriverLib, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, 25));
 
-        jtxtDbDriverLib.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbDriverLib.setPreferredSize(new java.awt.Dimension(500, 30));
-        add(jtxtDbDriverLib, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
+        jtxtDbWebDriverLib.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtxtDbWebDriverLib.setPreferredSize(new java.awt.Dimension(500, 30));
+        add(jtxtDbWebDriverLib, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
 
-        jbtnDbDriverLib.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/fileopen.png"))); // NOI18N
-        jbtnDbDriverLib.setText("  ");
-        jbtnDbDriverLib.setToolTipText("");
-        jbtnDbDriverLib.setMaximumSize(new java.awt.Dimension(64, 32));
-        jbtnDbDriverLib.setMinimumSize(new java.awt.Dimension(64, 32));
-        jbtnDbDriverLib.setPreferredSize(new java.awt.Dimension(80, 45));
-        add(jbtnDbDriverLib, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, -1, -1));
+        jbtnDbWebDriverLib.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/fileopen.png"))); // NOI18N
+        jbtnDbWebDriverLib.setText("  ");
+        jbtnDbWebDriverLib.setToolTipText("");
+        jbtnDbWebDriverLib.setMaximumSize(new java.awt.Dimension(64, 32));
+        jbtnDbWebDriverLib.setMinimumSize(new java.awt.Dimension(64, 32));
+        jbtnDbWebDriverLib.setPreferredSize(new java.awt.Dimension(80, 45));
+        add(jbtnDbWebDriverLib, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setText(AppLocal.getIntString("label.DbWebDriver")); // NOI18N
-        jLabel1.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, -1, -1));
+        jLblDbWebDriver.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLblDbWebDriver.setText(AppLocal.getIntString("label.DbWebDriver")); // NOI18N
+        jLblDbWebDriver.setPreferredSize(new java.awt.Dimension(125, 30));
+        add(jLblDbWebDriver, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, -1, -1));
 
-        jtxtDbDriver.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbDriver.setPreferredSize(new java.awt.Dimension(150, 30));
-        jtxtDbDriver.addActionListener(new java.awt.event.ActionListener() {
+        jtxtDbWebDriver.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtxtDbWebDriver.setPreferredSize(new java.awt.Dimension(150, 30));
+        jtxtDbWebDriver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtDbDriverActionPerformed(evt);
+                jtxtDbWebDriverActionPerformed(evt);
             }
         });
-        add(jtxtDbDriver, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, -1, -1));
+        add(jtxtDbWebDriver, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 180, -1));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setText(AppLocal.getIntString("label.DbWebURL")); // NOI18N
-        jLabel2.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 343, -1, -1));
+        jLblDbWebURL.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLblDbWebURL.setText(AppLocal.getIntString("label.DbWebURL")); // NOI18N
+        jLblDbWebURL.setPreferredSize(new java.awt.Dimension(125, 30));
+        add(jLblDbWebURL, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 343, -1, -1));
 
-        jtxtDbURL.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbURL.setPreferredSize(new java.awt.Dimension(275, 30));
-        add(jtxtDbURL, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 343, -1, -1));
+        jtxtDbWebURL.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtxtDbWebURL.setPreferredSize(new java.awt.Dimension(275, 30));
+        add(jtxtDbWebURL, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 343, 470, -1));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText(AppLocal.getIntString("label.DbWebUser")); // NOI18N
-        jLabel3.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
+        jLblDbWebUser.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLblDbWebUser.setText(AppLocal.getIntString("label.DbWebUser")); // NOI18N
+        jLblDbWebUser.setPreferredSize(new java.awt.Dimension(125, 30));
+        add(jLblDbWebUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
 
-        jtxtDbUser.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbUser.setPreferredSize(new java.awt.Dimension(150, 30));
-        add(jtxtDbUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 380, -1, -1));
+        jtxtDbWebUser.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtxtDbWebUser.setPreferredSize(new java.awt.Dimension(150, 30));
+        add(jtxtDbWebUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 380, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText(AppLocal.getIntString("label.DbWebPassword")); // NOI18N
-        jLabel4.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 417, -1, -1));
+        jLblDbWebPass.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLblDbWebPass.setText(AppLocal.getIntString("label.DbWebPassword")); // NOI18N
+        jLblDbWebPass.setPreferredSize(new java.awt.Dimension(125, 30));
+        add(jLblDbWebPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 417, -1, -1));
 
-        jtxtDbPassword.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbPassword.setPreferredSize(new java.awt.Dimension(150, 30));
-        add(jtxtDbPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 417, -1, -1));
+        jtxtDbWebPassword.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtxtDbWebPassword.setPreferredSize(new java.awt.Dimension(150, 30));
+        add(jtxtDbWebPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 417, -1, -1));
 
-        jButtonTest.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtonTest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/database.png"))); // NOI18N
-        jButtonTest.setText(bundle.getString("button.test")); // NOI18N
-        jButtonTest.setActionCommand(bundle.getString("Button.Test")); // NOI18N
-        jButtonTest.setPreferredSize(new java.awt.Dimension(110, 45));
-        jButtonTest.addActionListener(new java.awt.event.ActionListener() {
+        jBtnWebTest.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnWebTest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/database.png"))); // NOI18N
+        jBtnWebTest.setText(bundle.getString("button.test")); // NOI18N
+        jBtnWebTest.setActionCommand(bundle.getString("Button.Test")); // NOI18N
+        jBtnWebTest.setPreferredSize(new java.awt.Dimension(110, 45));
+        jBtnWebTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTestActionPerformed(evt);
+                jBtnWebTestActionPerformed(evt);
             }
         });
-        add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 455, -1, -1));
+        add(jBtnWebTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 455, -1, -1));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 137, 880, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -334,130 +294,51 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
         jLabel5.setPreferredSize(new java.awt.Dimension(889, 120));
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 880, -1));
 
-        jButtonTest1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtonTest1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/database.png"))); // NOI18N
-        jButtonTest1.setText(bundle.getString("button.test")); // NOI18N
-        jButtonTest1.setActionCommand(bundle.getString("Button.Test")); // NOI18N
-        jButtonTest1.setEnabled(false);
-        jButtonTest1.setPreferredSize(new java.awt.Dimension(110, 45));
-        jButtonTest1.addActionListener(new java.awt.event.ActionListener() {
+        jLblDbWebName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLblDbWebName.setText(AppLocal.getIntString("label.DbWebName")); // NOI18N
+        jLblDbWebName.setPreferredSize(new java.awt.Dimension(125, 30));
+        add(jLblDbWebName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 269, -1, -1));
+
+        jtxtDbWebName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtxtDbWebName.setPreferredSize(new java.awt.Dimension(275, 30));
+        add(jtxtDbWebName, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 269, -1, -1));
+
+        LblMultiDbWeb.setText(AppLocal.getIntString("label.dbweb")); // NOI18N
+        LblMultiDbWeb.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        LblMultiDbWeb.setPreferredSize(new java.awt.Dimension(125, 30));
+        add(LblMultiDbWeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
+        webEnable.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        webEnable.setPreferredSize(new java.awt.Dimension(80, 30));
+        webEnable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTest1ActionPerformed(evt);
+                webEnableActionPerformed(evt);
             }
         });
-        add(jButtonTest1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 455, -1, -1));
+        add(webEnable, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
 
-        jtxtDbPassword1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbPassword1.setEnabled(false);
-        jtxtDbPassword1.setPreferredSize(new java.awt.Dimension(150, 30));
-        add(jtxtDbPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 417, -1, -1));
+        jLblDbWebIP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLblDbWebIP.setText(AppLocal.getIntString("label.DbWebIP")); // NOI18N
+        jLblDbWebIP.setPreferredSize(new java.awt.Dimension(125, 30));
+        add(jLblDbWebIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 306, -1, -1));
 
-        jtxtDbUser1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbUser1.setEnabled(false);
-        jtxtDbUser1.setPreferredSize(new java.awt.Dimension(150, 30));
-        add(jtxtDbUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, -1, -1));
+        jtxtDbWebIP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtxtDbWebIP.setPreferredSize(new java.awt.Dimension(135, 30));
+        add(jtxtDbWebIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 306, -1, -1));
 
-        jtxtDbURL1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbURL1.setEnabled(false);
-        jtxtDbURL1.setPreferredSize(new java.awt.Dimension(275, 30));
-        add(jtxtDbURL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 343, -1, -1));
+        jLblDbWebPort.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLblDbWebPort.setText(AppLocal.getIntString("label.DbWebPort")); // NOI18N
+        jLblDbWebPort.setPreferredSize(new java.awt.Dimension(50, 30));
+        add(jLblDbWebPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 306, -1, -1));
 
-        jLblDbURL1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLblDbURL1.setText(AppLocal.getIntString("label.DbWebURL1")); // NOI18N
-        jLblDbURL1.setEnabled(false);
-        jLblDbURL1.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLblDbURL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 343, -1, -1));
-
-        jLblDbUser1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLblDbUser1.setText(AppLocal.getIntString("label.DbWebUser")); // NOI18N
-        jLblDbUser1.setEnabled(false);
-        jLblDbUser1.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLblDbUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, -1, -1));
-
-        jLblDbPassword1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLblDbPassword1.setText(AppLocal.getIntString("label.DbWebPassword")); // NOI18N
-        jLblDbPassword1.setEnabled(false);
-        jLblDbPassword1.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLblDbPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 417, -1, -1));
-
-        jLblDBName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLblDBName.setText(AppLocal.getIntString("label.DbWebName")); // NOI18N
-        jLblDBName.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLblDBName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 269, -1, -1));
-
-        jtxtDbName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbName.setPreferredSize(new java.awt.Dimension(275, 30));
-        add(jtxtDbName, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 269, -1, -1));
-
-        jLblDbName1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLblDbName1.setText(AppLocal.getIntString("label.DbWebName1")); // NOI18N
-        jLblDbName1.setEnabled(false);
-        jLblDbName1.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLblDbName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 269, -1, -1));
-
-        jtxtDbName1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbName1.setEnabled(false);
-        jtxtDbName1.setPreferredSize(new java.awt.Dimension(275, 30));
-        add(jtxtDbName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 269, -1, -1));
-
-        LblMultiDB.setText(AppLocal.getIntString("label.dbweb")); // NOI18N
-        LblMultiDB.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        LblMultiDB.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(LblMultiDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
-
-        multiDB.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        multiDB.setPreferredSize(new java.awt.Dimension(80, 30));
-        multiDB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                multiDBActionPerformed(evt);
-            }
-        });
-        add(multiDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
-
-        jLblDBIP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLblDBIP.setText(AppLocal.getIntString("label.DbWebIP")); // NOI18N
-        jLblDBIP.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLblDBIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 306, -1, -1));
-
-        jtxtDbIP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbIP.setPreferredSize(new java.awt.Dimension(135, 30));
-        add(jtxtDbIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 306, -1, -1));
-
-        jLblDbIP1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLblDbIP1.setText(AppLocal.getIntString("label.IPWeb1")); // NOI18N
-        jLblDbIP1.setEnabled(false);
-        jLblDbIP1.setPreferredSize(new java.awt.Dimension(125, 30));
-        add(jLblDbIP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 306, -1, -1));
-
-        jtxtDbIP1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbIP1.setEnabled(false);
-        jtxtDbIP1.setPreferredSize(new java.awt.Dimension(135, 30));
-        add(jtxtDbIP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 306, -1, -1));
-
-        jLblDBPort.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLblDBPort.setText(AppLocal.getIntString("label.DbWebPort")); // NOI18N
-        jLblDBPort.setPreferredSize(new java.awt.Dimension(50, 30));
-        add(jLblDBPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 306, -1, -1));
-
-        jtxtDbPort.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbPort.setPreferredSize(new java.awt.Dimension(70, 30));
-        add(jtxtDbPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 306, 70, -1));
-
-        jLblDBPort1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLblDBPort1.setText(AppLocal.getIntString("label.DbWebPort1")); // NOI18N
-        jLblDBPort1.setEnabled(false);
-        jLblDBPort1.setPreferredSize(new java.awt.Dimension(50, 30));
-        add(jLblDBPort1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 306, -1, -1));
-
-        jtxtDbPort1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtDbPort1.setEnabled(false);
-        jtxtDbPort1.setPreferredSize(new java.awt.Dimension(70, 30));
-        add(jtxtDbPort1, new org.netbeans.lib.awtextra.AbsoluteConstraints(774, 306, -1, -1));
+        jtxtDbWebPort.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtxtDbWebPort.setPreferredSize(new java.awt.Dimension(70, 30));
+        add(jtxtDbWebPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 306, 70, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtxtDbDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDbDriverActionPerformed
+    private void jtxtDbWebDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDbWebDriverActionPerformed
 
-    }//GEN-LAST:event_jtxtDbDriverActionPerformed
+    }//GEN-LAST:event_jtxtDbWebDriverActionPerformed
 
     private void jcboDBDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcboDBDriverActionPerformed
 
@@ -466,23 +347,23 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
            
         
         if ("PostgreSQL".equals(jcboDBDriver.getSelectedItem())) {
-            jtxtDbDriverLib.setText(new File(new File(dirname), "lib/postgresql-9.4-1208.jdbc4.jar").getAbsolutePath());
-            jtxtDbDriver.setText("org.postgresql.Driver");
-            jtxtDbURL.setText("jdbc:postgresql://localhost:5432/unicentaopos");            
+            jtxtDbWebDriverLib.setText(new File(new File(dirname), "lib/postgresql-9.4-1208.jdbc4.jar").getAbsolutePath());
+            jtxtDbWebDriver.setText("org.postgresql.Driver");
+            jtxtDbWebURL.setText("jdbc:postgresql://localhost:5432/unicentaopos");            
         } else {
-            jtxtDbDriverLib.setText(new File(new File(dirname), "lib/mysql-connector-java-5.1.34-bin.jar").getAbsolutePath());
-            jtxtDbDriver.setText("com.mysql.jdbc.Driver");
-            jtxtDbURL.setText("jdbc:mysql://localhost:3306/unicentaopos");
+            jtxtDbWebDriverLib.setText(new File(new File(dirname), "lib/mysql-connector-java-5.1.34-bin.jar").getAbsolutePath());
+            jtxtDbWebDriver.setText("com.mysql.jdbc.Driver");
+            jtxtDbWebURL.setText("jdbc:mysql://localhost:3306/unicentaopos");
         }    
     }//GEN-LAST:event_jcboDBDriverActionPerformed
 
-    private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTestActionPerformed
+    private void jBtnWebTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnWebTestActionPerformed
         try {
-            String driverlib = jtxtDbDriverLib.getText();
-            String driver = jtxtDbDriver.getText();
-            String url = jtxtDbURL.getText();
-            String user = jtxtDbUser.getText();
-            String password = new String(jtxtDbPassword.getPassword());
+            String driverlib = jtxtDbWebDriverLib.getText();
+            String driver = jtxtDbWebDriver.getText();
+            String url = jtxtDbWebURL.getText();
+            String user = jtxtDbWebUser.getText();
+            String password = new String(jtxtDbWebPassword.getPassword());
 
             ClassLoader cloader = new URLClassLoader(new URL[]{new File(driverlib).toURI().toURL()});
             DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(driver, true, cloader).newInstance()));
@@ -512,118 +393,68 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
             JMessageDialog.showMessage(this, 
                     new MessageInf(MessageInf.SGN_WARNING, "Unknown exception", e));
         }
-    }//GEN-LAST:event_jButtonTestActionPerformed
+    }//GEN-LAST:event_jBtnWebTestActionPerformed
 
-    private void jButtonTest1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTest1ActionPerformed
-        try {
-            String driverlib = jtxtDbDriverLib.getText();
-            String driver = jtxtDbDriver.getText();
-            String url = jtxtDbURL1.getText();
-            String user = jtxtDbUser1.getText();
-            String password = new String(jtxtDbPassword1.getPassword());
+    private void webEnableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webEnableActionPerformed
+        if (webEnable.isSelected()) {
+            jLblDbWebName.setEnabled(true);
+            jtxtDbWebName.setEnabled(true);
+            jLblDbWebIP.setEnabled(true);
+            jtxtDbWebIP.setEnabled(true);  
+            jLblDbWebPort.setEnabled(true);
+            jtxtDbWebPort.setEnabled(true);            
+            jLblDbWebURL.setEnabled(true);
+            jtxtDbWebURL.setEnabled(true);            
+            jLblDbWebUser.setEnabled(true);
+            jtxtDbWebUser.setEnabled(true);
+            jLblDbWebPass.setEnabled(true);
+            jtxtDbWebPassword.setEnabled(true);
+            jBtnWebTest.setEnabled(true);
 
-            ClassLoader cloader = new URLClassLoader(new URL[]{new File(driverlib).toURI().toURL()});
-            DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(driver, true, cloader).newInstance()));
-
-            Session session =  new Session(url, user, password);
-            Connection connection = session.getConnection();
-            boolean isValid;
-            isValid = (connection == null) ? false : connection.isValid(1000);
-
-            if (isValid) {
-                JOptionPane.showMessageDialog(this, 
-                        AppLocal.getIntString("message.databasesuccess"), 
-                        "Connection Test", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JMessageDialog.showMessage(this, 
-                        new MessageInf(MessageInf.SGN_WARNING, "Connection Error"));
-            }
-        } catch (InstantiationException | IllegalAccessException | MalformedURLException | ClassNotFoundException e) {
-            JMessageDialog.showMessage(this, 
-                    new MessageInf(MessageInf.SGN_WARNING, 
-                            AppLocal.getIntString("message.databasedrivererror"), e));
-        } catch (SQLException e) {
-            JMessageDialog.showMessage(this, 
-                    new MessageInf(MessageInf.SGN_WARNING, 
-                            AppLocal.getIntString("message.databaseconnectionerror"), e));
-        } catch (Exception e) {
-            JMessageDialog.showMessage(this, 
-                    new MessageInf(MessageInf.SGN_WARNING, "Unknown exception", e));
-        }
-    }//GEN-LAST:event_jButtonTest1ActionPerformed
-
-    private void multiDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiDBActionPerformed
-        if (multiDB.isSelected()) {
-            jLblDbName1.setEnabled(true);
-            jtxtDbName1.setEnabled(true);
-            jLblDbIP1.setEnabled(true);
-            jtxtDbIP1.setEnabled(true);  
-            jLblDBPort1.setEnabled(true);
-            jtxtDbPort1.setEnabled(true);            
-            jLblDbURL1.setEnabled(true);
-            jtxtDbURL1.setEnabled(true);            
-            jLblDbUser1.setEnabled(true);
-            jtxtDbUser1.setEnabled(true);
-            jLblDbPassword1.setEnabled(true);
-            jtxtDbPassword1.setEnabled(true);
-            jButtonTest1.setEnabled(true);
         } else {
-            jLblDbName1.setEnabled(false);
-            jtxtDbName1.setEnabled(false);
-            jLblDbIP1.setEnabled(false);
-            jtxtDbIP1.setEnabled(false);  
-            jLblDBPort1.setEnabled(false);
-            jtxtDbPort1.setEnabled(false);            
-            jLblDbURL1.setEnabled(false);
-            jtxtDbURL1.setEnabled(false);                        
-            jLblDbUser1.setEnabled(false);
-            jtxtDbUser1.setEnabled(false);
-            jLblDbPassword1.setEnabled(false);
-            jtxtDbPassword1.setEnabled(false);            
-            jButtonTest1.setEnabled(false);            
+            jLblDbWebName.setEnabled(false);
+            jtxtDbWebName.setEnabled(false);
+            jLblDbWebIP.setEnabled(false);
+            jtxtDbWebIP.setEnabled(false);  
+            jLblDbWebPort.setEnabled(false);
+            jtxtDbWebPort.setEnabled(false);            
+            jLblDbWebURL.setEnabled(false);
+            jtxtDbWebURL.setEnabled(false);            
+            jLblDbWebUser.setEnabled(false);
+            jtxtDbWebUser.setEnabled(false);
+            jLblDbWebPass.setEnabled(false);
+            jtxtDbWebPassword.setEnabled(false);
+            jBtnWebTest.setEnabled(false);
         }
 
-    }//GEN-LAST:event_multiDBActionPerformed
+    }//GEN-LAST:event_webEnableActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.alee.laf.label.WebLabel LblMultiDB;
-    private javax.swing.JButton jButtonTest;
-    private javax.swing.JButton jButtonTest1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private com.alee.laf.label.WebLabel LblMultiDbWeb;
+    private javax.swing.JButton jBtnWebTest;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLblDBIP;
-    private javax.swing.JLabel jLblDBName;
-    private javax.swing.JLabel jLblDBPort;
-    private javax.swing.JLabel jLblDBPort1;
-    private javax.swing.JLabel jLblDbIP1;
-    private javax.swing.JLabel jLblDbName1;
-    private javax.swing.JLabel jLblDbPassword1;
-    private javax.swing.JLabel jLblDbURL1;
-    private javax.swing.JLabel jLblDbUser1;
+    private javax.swing.JLabel jLblDbWeb;
+    private javax.swing.JLabel jLblDbWebDriver;
+    private javax.swing.JLabel jLblDbWebDriverLib;
+    private javax.swing.JLabel jLblDbWebIP;
+    private javax.swing.JLabel jLblDbWebName;
+    private javax.swing.JLabel jLblDbWebPass;
+    private javax.swing.JLabel jLblDbWebPort;
+    private javax.swing.JLabel jLblDbWebURL;
+    private javax.swing.JLabel jLblDbWebUser;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton jbtnDbDriverLib;
+    private javax.swing.JButton jbtnDbWebDriverLib;
     private javax.swing.JComboBox jcboDBDriver;
-    private javax.swing.JTextField jtxtDbDriver;
-    private javax.swing.JTextField jtxtDbDriverLib;
-    private javax.swing.JTextField jtxtDbIP;
-    private javax.swing.JTextField jtxtDbIP1;
-    private javax.swing.JTextField jtxtDbName;
-    private javax.swing.JTextField jtxtDbName1;
-    private javax.swing.JPasswordField jtxtDbPassword;
-    private javax.swing.JPasswordField jtxtDbPassword1;
-    private javax.swing.JTextField jtxtDbPort;
-    private javax.swing.JTextField jtxtDbPort1;
-    private javax.swing.JTextField jtxtDbURL;
-    private javax.swing.JTextField jtxtDbURL1;
-    private javax.swing.JTextField jtxtDbUser;
-    private javax.swing.JTextField jtxtDbUser1;
-    private com.alee.extended.button.WebSwitch multiDB;
+    private javax.swing.JTextField jtxtDbWebDriver;
+    private javax.swing.JTextField jtxtDbWebDriverLib;
+    private javax.swing.JTextField jtxtDbWebIP;
+    private javax.swing.JTextField jtxtDbWebName;
+    private javax.swing.JPasswordField jtxtDbWebPassword;
+    private javax.swing.JTextField jtxtDbWebPort;
+    private javax.swing.JTextField jtxtDbWebURL;
+    private javax.swing.JTextField jtxtDbWebUser;
+    private com.alee.extended.button.WebSwitch webEnable;
     private com.alee.extended.window.WebPopOver webPopOver1;
     // End of variables declaration//GEN-END:variables
 
