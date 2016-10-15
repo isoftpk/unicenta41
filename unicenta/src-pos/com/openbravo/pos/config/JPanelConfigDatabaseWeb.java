@@ -52,6 +52,7 @@ public class JPanelConfigDatabaseWeb extends javax.swing.JPanel implements Panel
         
         initComponents();
         
+        
         jtxtDbDriverLib.getDocument().addDocumentListener(dirty);
         jtxtDbDriver.getDocument().addDocumentListener(dirty);
         jbtnDbDriverLib.addActionListener(new DirectoryEvent(jtxtDbDriverLib));
