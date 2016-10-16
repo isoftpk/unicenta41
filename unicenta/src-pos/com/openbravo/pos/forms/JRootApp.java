@@ -80,6 +80,7 @@ public class JRootApp extends JPanel implements AppView, DeviceMonitorEventListe
 
     private AppProperties m_props;
     private Session session;     
+    private Session webSession;     
     private DataLogicSystem m_dlSystem;
     
     private Properties m_propsdb = null;
@@ -122,7 +123,8 @@ public class JRootApp extends JPanel implements AppView, DeviceMonitorEventListe
     static {        
         initOldClasses();
     }
-                
+
+               
     private class PrintTimeAction implements ActionListener {
 
         @Override
@@ -320,6 +322,7 @@ public class JRootApp extends JPanel implements AppView, DeviceMonitorEventListe
         
         try {
             session = AppViewConnection.createSession(m_props);
+            webSession = AppViewConnectionWeb.createSession(m_props);
             
         } catch (BasicException e) {
             JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_DANGER, e.getMessage(), e));
@@ -410,6 +413,7 @@ public class JRootApp extends JPanel implements AppView, DeviceMonitorEventListe
         }
         
         m_TP = new DeviceTicket(this, m_props);
+        
         
         m_TTP = new TicketParser(getDeviceTicket(), m_dlSystem);
         printerStart();
@@ -522,6 +526,12 @@ public class JRootApp extends JPanel implements AppView, DeviceMonitorEventListe
         return session;
     } 
 
+    /// PK - added web store db session
+    @Override
+    public Session getWebSession() {
+        return webSession;
+    }
+    
     @Override
     public String getInventoryLocation() {
         return m_sInventoryLocation;

@@ -105,6 +105,7 @@ public class ProductsPanel extends JPanelTable2 implements EditorListener {
      *
      * @return jbarcodeprint
      */
+    /// PK - Added Barcode Printer
     public EditorRecord getJBarcodePrint() {
 	return jbarcodeprint;
 }    

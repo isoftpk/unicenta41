@@ -36,6 +36,9 @@ public interface AppView {
     public DeviceScanner getDeviceScanner();
     public Session getSession();
     public AppProperties getProperties();
+    
+    /// PK - add web database support
+    public Session getWebSession();
 
     /**
      *
