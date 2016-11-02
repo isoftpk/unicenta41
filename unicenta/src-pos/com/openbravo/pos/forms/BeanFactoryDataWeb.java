@@ -23,7 +23,7 @@ import com.openbravo.data.loader.Session;
 
 /**
  *
- * @author adrianromero
+ * @author PK
  */
 public abstract class BeanFactoryDataWeb implements BeanFactoryApp {
     

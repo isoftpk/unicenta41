@@ -420,6 +420,11 @@ public class BrowsableEditableData {
                 int i = m_bd.updateRecord(m_iIndex, m_editorrecord.createValue());
                 m_editorrecord.refresh();
                 baseMoveTo(i);
+                
+                /// PK 
+                /// update product on website catalog
+                //if (m_bd.updateRecordWeb(i))
+                
             } else if (m_iState == ST_INSERT) {
                     int i = m_bd.insertRecord(m_editorrecord.createValue());
                     m_editorrecord.refresh();

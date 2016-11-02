@@ -21,6 +21,7 @@ package com.openbravo.data.user;
 
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.loader.LocalRes;
+import com.openbravo.pos.forms.DataLogicWeb;
 import java.util.*;
 import javax.swing.ListModel;
 import javax.swing.event.EventListenerList;
@@ -42,10 +43,13 @@ public class BrowsableData implements ListModel {
     private ListProvider m_dataprov;      
     private SaveProvider m_saveprov;  
     
+    ///PK - Web provider
+    private SaveProvider m_saveprovweb;  
+    
     private List m_aData; // List<Object>
     
     private Comparator m_comparer;
-    
+
     /** Creates a new instance of BrowsableData
      * @param dataprov
      * @param saveprov
@@ -57,6 +61,10 @@ public class BrowsableData implements ListModel {
         m_bIsAdjusting = false;
         
         m_aData = new ArrayList();
+        
+        ///PK - Web
+   
+        
     }
 
     /**
@@ -266,7 +274,6 @@ public class BrowsableData implements ListModel {
     }
 
     /**
-     *
      * @param index
      * @return
      * @throws BasicException
@@ -296,7 +303,6 @@ public class BrowsableData implements ListModel {
     }
     
     /**
-     *
      * @param index
      * @param value
      * @return
@@ -306,12 +312,6 @@ public class BrowsableData implements ListModel {
                 
         if (canUpdateData() && index >= 0 && index < m_aData.size()) {
             if (m_saveprov.updateData(value) > 0) { 
-                
-            /// PK
-            /// update product on website catalog
-            
-            
-                
                 // Modificamos el elemento indicado
                 int newindex;
                 if (m_comparer == null) {
@@ -348,7 +348,20 @@ public class BrowsableData implements ListModel {
             throw new BasicException(LocalRes.getIntString("exception.noupdate"));
         }
     }
+    
+    
 
+    /// PK
+    /// update product on website catalog
+    public final boolean updateRecordWeb(Object value) throws BasicException    {
+        
+        
+        
+        return true;
+    }
+
+
+    
     /**
      *
      * @param value

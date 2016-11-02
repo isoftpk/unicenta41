@@ -38,7 +38,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author adrianromero
+ * @author PK
  */
 public class AppViewConnectionWeb {
     

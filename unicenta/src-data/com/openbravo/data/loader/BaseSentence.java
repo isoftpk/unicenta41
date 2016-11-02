@@ -37,7 +37,7 @@ public abstract class BaseSentence implements SentenceList, SentenceFind, Senten
      * @return
      * @throws BasicException
      */
-        public abstract DataResultSet openExec(Object params) throws BasicException;
+    public abstract DataResultSet openExec(Object params) throws BasicException;
 
     /**
      *

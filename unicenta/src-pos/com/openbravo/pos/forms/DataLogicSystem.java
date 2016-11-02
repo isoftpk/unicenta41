@@ -91,8 +91,7 @@ public class DataLogicSystem extends BeanFactoryDataSingle {
         m_sInitScript = "/com/openbravo/pos/scripts/" + s.DB.getName();
         m_dbVersion = s.DB.getName();
 
-        m_version = new PreparedSentence(s, "SELECT VERSION FROM applications WHERE ID = ?"
-            , SerializerWriteString.INSTANCE, SerializerReadString.INSTANCE);
+        m_version = new PreparedSentence(s, "SELECT VERSION FROM applications WHERE ID = ?", SerializerWriteString.INSTANCE, SerializerReadString.INSTANCE);
 
         m_dummy = new StaticSentence(s, "SELECT * FROM people WHERE 1 = 0");
          

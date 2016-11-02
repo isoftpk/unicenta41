@@ -29,6 +29,7 @@ import com.openbravo.format.Formats;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.AppView;
 import com.openbravo.pos.forms.DataLogicSales;
+import com.openbravo.pos.forms.DataLogicWeb;
 import com.openbravo.pos.sales.TaxesLogic;
 import com.openbravo.pos.suppliers.DataLogicSuppliers;
 import com.openbravo.pos.suppliers.JDialogNewSupplier;
@@ -57,6 +58,8 @@ public final class ProductsEditor extends javax.swing.JPanel implements EditorRe
     private Object m_oId;
 
     private final DataLogicSales dlSales;    
+    /// PK - new web datalogic
+    private final DataLogicWeb dlWeb;    
     private final DataLogicSuppliers m_dlSuppliers;    
     
     private final SentenceList m_sentcat;
@@ -98,10 +101,13 @@ public final class ProductsEditor extends javax.swing.JPanel implements EditorRe
 
         setAppView(app);
         dlSales = (DataLogicSales) app.getBean("com.openbravo.pos.forms.DataLogicSales");
+
+        dlWeb = (DataLogicWeb) app.getBean("com.openbravo.pos.forms.DataLogicWeb");
+
         m_dlSuppliers = (DataLogicSuppliers) app.getBean("com.openbravo.pos.suppliers.DataLogicSuppliers");
             
         initComponents();
-        
+
         loadimage = dlSales.getProductImage(); // JG 3 feb 16 speedup
 
         taxsent = dlSales.getTaxList();
@@ -311,6 +317,7 @@ public final class ProductsEditor extends javax.swing.JPanel implements EditorRe
         calculateMargin();
         calculatePriceSellTax();
         calculateGP();
+       
     }
 
     @Override
@@ -405,6 +412,13 @@ public final class ProductsEditor extends javax.swing.JPanel implements EditorRe
         calculateMargin();
         calculatePriceSellTax();
         calculateGP();        
+        
+       try {
+            System.out.println(dlWeb.findProductNameById());
+        }
+            catch (BasicException e) {
+                e.printStackTrace();
+        }
     }
 
     /**
@@ -430,7 +444,10 @@ public final class ProductsEditor extends javax.swing.JPanel implements EditorRe
         myprod[10] = Formats.CURRENCY.parseValue(m_jstockcost.getText());
         myprod[11] = Formats.DOUBLE.parseValue(m_jstockvolume.getText());        
         myprod[12] = m_jImage.getImage();
+        
+        ///PK - On Web Sore = m_jComment
         myprod[13] = m_jComment.isSelected();
+
         myprod[14] = m_jScale.isSelected();
 	myprod[15] = m_jConstant.isSelected();
 	myprod[16] = m_jPrintKB.isSelected(); 
@@ -480,7 +497,10 @@ public final class ProductsEditor extends javax.swing.JPanel implements EditorRe
         m_jstockvolume.setText(Formats.DOUBLE.formatValue(myprod[11]));
 //  JG 3 feb 16 speedup   m_jImage.setImage((BufferedImage) myprod[12]); 
         m_jImage.setImage(findImage(m_oId));       
+        
+        ///PK - On Web Sore = m_jComment
         m_jComment.setSelected(((Boolean)myprod[13]));
+        
         m_jScale.setSelected(((Boolean)myprod[14]));
 	m_jConstant.setSelected(((Boolean)myprod[15]));
         m_jPrintKB.setSelected(((Boolean)myprod[16]));

@@ -156,6 +156,13 @@ public class JSaver extends JPanel implements StateListener {
         try {
             m_bd.saveData();
             
+//        try {
+//            System.out.println(dlWeb.findProductName());
+//        }
+//        catch (BasicException e) {
+//            
+//        }
+            
           
         } catch (BasicException eD) {
             MessageInf msg = new MessageInf(MessageInf.SGN_NOTICE, LocalRes.getIntString("message.nosave"), eD);

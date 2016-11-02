@@ -68,7 +68,7 @@ public class ProductsPanel extends JPanelTable2 implements EditorListener {
 	} 
          catch (TicketPrinterException e) {
 	// TODO Auto-generated catch block
-	e.printStackTrace();
+            e.printStackTrace();
         }
 
         row = m_dlSales.getProductsRow();
